@@ -4,36 +4,37 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+	selector: 'app-nav',
+	templateUrl: './nav.component.html',
+	styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: any = {};
+	model: any = {};
 
-  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
+	constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  login() {
-    this.authService.login(this.model).subscribe(next => {
-      this.alertify.success('Logged in successfully');
-    }, error => {
-      this.alertify.error(error);
-    }, () => {
-      this.router.navigate(['/members']);
-    });
-  }
+	login() {
+		this.authService.login(this.model).subscribe(next => {
+			this.alertify.success('Logged in successfully');
+		}, error => {
+			this.alertify.error(error);
+		}, () => {
+			this.router.navigate(['/members']);
+		});
+	}
 
-  loggedIn() {
-    return this.authService.loggedIn();
-  }
+	loggedIn() {
+		const token = localStorage.getItem('token');
+		return !!token;
+	}
 
-  logout() {
-    localStorage.removeItem('token');
-    this.alertify.message('logged out');
-    this.router.navigate(['/home']);
-  }
+	logout() {
+		localStorage.removeItem('token');
+		this.alertify.message('logged out');
+		this.router.navigate(['/home']);
+	}
 
 }
