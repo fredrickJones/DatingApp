@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+// import { TabsetComponent } from 'ngx-bootstrap';
 
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
