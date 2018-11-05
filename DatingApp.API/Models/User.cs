@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DatingApp.API.Models
 {
-    public class User : IdentityUser<int>
+    public class User
     {
         public int ID { get; set; }
         public string Username { get; set; }
-        public new byte[] PasswordHash { get; set; }
+        public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }

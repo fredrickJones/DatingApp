@@ -20,20 +20,21 @@ export class AuthService {
 
 	constructor(private http: HttpClient) { }
 
-	changeMemeberPhoto(photoUrl: string) {
+	changeMemberPhoto(photoUrl: string) {
 		this.photoUrl.next(photoUrl);
 	}
 
 	login(model: any) {
-		return this.http.post(this.baseUrl + 'login', model).pipe(
-			map((response: any) => {
+		return this.http
+			.post(this.baseUrl + 'login', model/*, this.requestOptions()*/)
+			.pipe(map((response: any) => {
 				const user = response;
 				if (user) {
 					localStorage.setItem('token', user.token);
 					localStorage.setItem('user', JSON.stringify(user.user));
 					this.decodedToken = this.jwtHelper.decodeToken(user.token);
 					this.currentUser = user.user;
-					console.log(this.decodedToken);
+					this.changeMemberPhoto(this.currentUser.photoUrl);
 				}
 			})
 		);
